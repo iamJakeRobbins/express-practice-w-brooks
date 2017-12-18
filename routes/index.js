@@ -5,10 +5,25 @@ const knex = require('../db/knex');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	knex('users')
-	.then(data =>{
-		console.log(data);
+		.then(data =>{
 		res.render('index', {data:data});
 	})
 });
+
+router.get('/success', function(req,res){
+	if (req.session.user != null){
+	res.render('success')
+	}	
+})
+
+router.post('/success', function(req,res) {
+	knex('users').where('username', req.body.username)
+	.then((data) =>{
+		if( data[0].username === req.body.username && data[0].password === req.body.password){
+	req.session.user = data[0].id
+	res.redirect('success')
+	}
+})
+})
 
 module.exports = router;
