@@ -8,6 +8,7 @@ var cookieSession = require('cookie-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+
 var app = express();
 
 // view engine setup
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
-  name: 'g64',
+  name: 'userauth',
   keys: ['asldfalsdkflasdkf'],
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000}))
